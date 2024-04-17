@@ -9,6 +9,9 @@ on:
 permissions:
   contents: write
 
+env:
+  ASSEMBLY_NAME: wcm_${{ github.ref_name }}_amd64
+
 jobs:
   release:
     runs-on: windows-latest
@@ -30,7 +33,7 @@ jobs:
           dotnet build `
           --no-restore `
           --configuration Release `
-          /p:AssemblyName=KSWinCredMan_${{ github.ref_name }}
+          /p:AssemblyName=${{ env.ASSEMBLY_NAME }}
 
       - name: Publish
         working-directory: WinCredentialManager
@@ -39,7 +42,12 @@ jobs:
           --no-build `
           --configuration Release `
           --output ..\publish `
-          /p:AssemblyName=KSWinCredMan_${{ github.ref_name }}
+          /p:AssemblyName=${{ env.ASSEMBLY_NAME }}
+
+      - name: Create checksum
+        run: |
+          $FileHash = (Get-FileHash publish\${{ env.ASSEMBLY_NAME }}.exe -Algorithm SHA256).Hash
+          New-Item -Path publish\checksums.txt -Value "$FileHash ${{ env.ASSEMBLY_NAME }}.exe" -Force
 
       - name: Create release
         env:
@@ -56,4 +64,5 @@ jobs:
         run: |
           gh release upload "${{ github.ref_name }}" `
             --repo "${{ github.repository }}" `
-            (Get-Item publish\*.exe).FullName
+            (Get-Item publish\${{ env.ASSEMBLY_NAME }}.exe).FullName `
+            (Get-Item publish\checksums.txt).FullName
