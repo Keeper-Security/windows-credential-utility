@@ -24,11 +24,11 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        working-directory: WinCredentialManager
+        working-directory: Keeper.WindowsCredentialManager
         run: dotnet restore
 
       - name: Build
-        working-directory: WinCredentialManager
+        working-directory: Keeper.WindowsCredentialManager
         run: |
           dotnet build `
           --no-restore `
@@ -36,7 +36,7 @@ jobs:
           /p:AssemblyName=${{ env.ASSEMBLY_NAME }}
 
       - name: Publish
-        working-directory: WinCredentialManager
+        working-directory: Keeper.WindowsCredentialManager
         run: |
           dotnet publish `
           --no-build `
