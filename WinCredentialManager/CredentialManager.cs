@@ -2,7 +2,7 @@
 using System.Text;
 using Microsoft.Win32.SafeHandles;
 
-namespace WinCredentialManager
+namespace WindowsCredentialManager
 {
     /// <summary>
     /// Enum for Credential Type. This program currently only supports Generic credentials.

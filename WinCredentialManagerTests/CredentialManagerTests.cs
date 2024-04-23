@@ -1,6 +1,6 @@
-﻿using WinCredentialManager;
+﻿using WindowsCredentialManager;
 
-namespace WinCredentialManagerTests
+namespace WindowsCredentialManagerTests
 {
     public class CredentialManagerTests : IDisposable
     {

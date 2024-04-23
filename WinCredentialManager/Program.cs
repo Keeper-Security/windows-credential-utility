@@ -1,6 +1,6 @@
 ﻿using System.CommandLine;
 
-namespace WinCredentialManager
+namespace WindowsCredentialManager
 {
     public class Program
     {

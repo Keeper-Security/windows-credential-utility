@@ -1,7 +1,7 @@
 {
   "profiles": {
-    "WinCredentialManager": {
-      "commandName": "Project",
+    "WindowsCredentialManager": {
+      "commandName": "Project"
     }
   }
 }
