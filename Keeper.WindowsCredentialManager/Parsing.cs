@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 
-namespace WinCredentialManager
+namespace WindowsCredentialManager
 {
     public class Parsing
     {

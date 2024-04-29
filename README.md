@@ -1,4 +1,4 @@
-# WinCredentialManager
+# Keeper Security's Windows Credential Manager Utility
 
 This utility interacts with the native windows APIs to store and retrieve secrets from the Windows Credential Manager.
 
