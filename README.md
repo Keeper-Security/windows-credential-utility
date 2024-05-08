@@ -12,14 +12,14 @@ As mentioned above, this utility is a self-contained executable file. Download t
 
 The executable supports two commands:
 
-1. `init`
+1. `set`
 2. `get`
 
 Both commands require an application `name` (i.e. the name of the credential in / to be stored in the Windows Credential Manager) as the first argument.
 
-### `init`
+### `set`
 
-`init` requires a second argument of the secret to be stored. This can be either a:
+`set` requires a second argument of the secret to be stored. This can be either a:
 
 1. BASE64 string
 2. JSON string
@@ -37,9 +37,9 @@ When the secret is saved to Windows Credential Manager it is first encoded into 
 
 ```shell
 # Save a secret
-binary_name init APPNAME eyJ1c2VybmFtZSI6ICJnb2xsdW0iLCAicGFzc3dvcmQiOiAiTXlQcmVjaW91cyJ9
+wcm set APPNAME eyJ1c2VybmFtZSI6ICJnb2xsdW0iLCAicGFzc3dvcmQiOiAiTXlQcmVjaW91cyJ9
 # or
-binary_name init APPNAME config.json
+wcm set APPNAME config.json
 
 # Retrieve a secret
 binary_name get APPNAME
