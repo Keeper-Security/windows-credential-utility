@@ -6,8 +6,8 @@ namespace WindowsCredentialManager
     {
         public static async Task<int> Main(string[] args)
         {
-            var initCommand = new Command(
-                name: "init",
+            var setCommand = new Command(
+                name: "set",
                 description: "Add a KSM Config to Windows Credential Manager."
             );
 
@@ -28,12 +28,12 @@ namespace WindowsCredentialManager
 
             var rootCommand = new RootCommand("KSM Windows Credential Manager");
 
-            rootCommand.AddCommand(initCommand);
+            rootCommand.AddCommand(setCommand);
             rootCommand.AddCommand(getCommand);
 
-            initCommand.AddArgument(appName);
-            initCommand.AddArgument(configArg);
-            initCommand.SetHandler((appName, configArg) =>
+            setCommand.AddArgument(appName);
+            setCommand.AddArgument(configArg);
+            setCommand.SetHandler((appName, configArg) =>
             {
                 CredentialManager.WriteCredential(appName, Environment.UserName, Parsing.ParseConfig(configArg));
                 // Exit with success code
