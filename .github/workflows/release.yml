@@ -76,3 +76,19 @@ jobs:
             --repo "${{ github.repository }}" `
             (Get-Item publish\${{ env.ASSEMBLY_NAME }}.exe).FullName `
             (Get-Item publish\checksums.txt).FullName
+
+      - name: Build NuGet package
+        run: |
+          dotnet pack `
+          --no-build `
+          --configuration Release `
+          --output ..\nuget `
+
+      - name: Push NuGet package
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push `
+          ..\nuget\*.nupkg `
+          --source https://api.nuget.org/v3/index.json `
+          --api-key ${{ env.NUGET_API_KEY }}
