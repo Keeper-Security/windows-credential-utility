@@ -35,9 +35,18 @@ namespace WindowsCredentialManager
             setCommand.AddArgument(configArg);
             setCommand.SetHandler((appName, configArg) =>
             {
-                CredentialManager.WriteCredential(appName, Environment.UserName, Parsing.ParseConfig(configArg));
-                // Exit with success code
-                Environment.Exit(0);
+                try 
+                {
+                    var secret = Parsing.ParseConfig(configArg);
+                    CredentialManager.WriteCredential(appName, Environment.UserName, secret);
+                    // Exit with success code
+                    Environment.Exit(0);
+                }
+                catch (ArgumentException e)
+                {
+                    Console.Error.WriteLine(e.Message);
+                    Environment.Exit(1);
+                }
             }, appName, configArg);
 
             getCommand.AddArgument(appName);
@@ -47,7 +56,7 @@ namespace WindowsCredentialManager
                 // Output cred to stdout and exit with success code 
                 if (cred == null)
                 {
-                    Console.WriteLine("No KSM Config found for the given application name.");
+                    Console.Error.WriteLine("No KSM Config found for the given application name.");
                     Environment.Exit(1);
                 }
                 Console.WriteLine(cred.Password);
