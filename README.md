@@ -42,7 +42,7 @@ wcm set APPNAME eyJ1c2VybmFtZSI6ICJnb2xsdW0iLCAicGFzc3dvcmQiOiAiTXlQcmVjaW91cyJ9
 wcm set APPNAME config.json
 
 # Retrieve a secret
-binary_name get APPNAME
+wcm get APPNAME
 ```
 
 ## Contributing
