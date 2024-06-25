@@ -2,13 +2,15 @@
 
 This utility interacts with the native windows APIs to store and retrieve secrets from the Windows Credential Manager.
 
-While initially developed to help Keeper secure KSM configs, this utility can be used by any integration, plugin, or code base, to store and retrieve credentials, secrets, and passwords in the Windows Credential Manager in a simple and native way. This utility has be designed to have a simple CLI interface, and the released binary to be self-contained with all dependencies and runtimes so it can work on any windows machine.
+While initially developed to help Keeper secure KSM configs, this utility can be used by any integration, plugin, or code base, to store and retrieve credentials, secrets, and passwords in the Windows Credential Manager in a simple and native way. 
 
-## Setup 
+This utility has be designed to have a simple CLI interface, and the released binary to be self-contained with all dependencies and runtimes so it can work on any windows machine. You can also add this a library to your existing code base via Nuget. Both use cases are covered below.
 
-As mentioned above, this utility is a self-contained executable file. Download the latest version from the releases page and optionally add it to PATH to get started.
+## Using the Executable 
 
-## Usage
+Download the latest version from the releases page and optionally add it to PATH to get started.
+
+### Usage
 
 The executable supports two commands:
 
@@ -33,7 +35,7 @@ When the secret is saved to Windows Credential Manager it is first encoded into 
 
 `get` returns the stored BASE64 encoded config to `stdout` and exits with a `0` exit code. The requesting integration can capture the output for consumption. Any errors encountered retrieving the config will return an `non-zero` exit code and write to `stderr`.
 
-### Example usage
+### Example
 
 ```shell
 # Save a secret
@@ -43,6 +45,49 @@ wcm set APPNAME config.json
 
 # Retrieve a secret
 wcm get APPNAME
+```
+
+## Using in Your Code
+
+You can install this utility into your code base via Nuget:
+
+```pwsh
+dotnet add package Keeper.WindowsCredentialManager
+```
+
+You can now import this into your code base with:
+
+```c#
+using WindowsCredentialManager
+```
+
+### Usage
+
+### `set`
+
+To wite to the Windows Credential Manager you can use the provided `WriteCredential` method on the `CredentialManager` object. This will write / overwrite the secret in the current user's Credential Manager. 
+
+You need to provide the three arguments to successfully add the secret to the Credential Manager.
+
+First, the application name (used for reference of the secret), the string represntation of the username of the user, and the secret itself. This should be either:
+
+1. A BASE64 string
+2. A JSON string
+3. A path to an existing JSON file
+
+When the secret is saved to the Credntial Manager it is first encoded into a BASE64 format (if not already a BASE64 string). This standardizes the format for both consistent storage and to make it easier to consume by Keeper integrations and products.
+
+```c#
+var secret = Parsing.ParseConfig(configArg); // Returns a BASE64 sring
+CredentialManager.WriteCredential("MY_APP_NAME", Environment.UserName, secret);
+```
+
+### `get`
+
+To retrieve a secret from the Credential Manager, you can pass the application name to the `ReadCredential` method. This returns the stored BASE64 encoded secret.
+
+```c#
+var cred = CredentialManager.ReadCredential("MY_APP_NAME");
 ```
 
 ## Contributing
