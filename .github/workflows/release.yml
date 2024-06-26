@@ -1,4 +1,4 @@
-name: release
+name: Release
 
 on:
   push:
@@ -44,6 +44,16 @@ jobs:
           --output ..\publish `
           /p:AssemblyName=${{ env.ASSEMBLY_NAME }}
 
+      - uses: dlemstra/code-sign-action@v1
+        with:
+          certificate: '${{ secrets.CERTIFICATE }}'
+          password: '${{ secrets.CERTIFICATE_PASSWORD }}'
+          folder: publish
+          recursive: true
+          files: |
+            ${{ env.ASSEMBLY_NAME }}.exe
+          description: "Keeper's Windows Credential Manager Utility"
+            
       - name: Create checksum
         run: |
           $FileHash = (Get-FileHash publish\${{ env.ASSEMBLY_NAME }}.exe -Algorithm SHA256).Hash
