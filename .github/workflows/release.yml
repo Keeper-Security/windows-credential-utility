@@ -44,6 +44,13 @@ jobs:
           --output ..\publish `
           /p:AssemblyName=${{ env.ASSEMBLY_NAME }}
 
+      - name: Build NuGet package
+        run: |
+          dotnet pack `
+          --no-build `
+          --configuration Release `
+          --output ..\publish `
+
       - uses: dlemstra/code-sign-action@v1
         with:
           certificate: '${{ secrets.CERTIFICATE }}'
@@ -52,6 +59,7 @@ jobs:
           recursive: true
           files: |
             ${{ env.ASSEMBLY_NAME }}.exe
+            ${{ env.ASSEMBLY_NAME }}.nupkg
           description: "Keeper's Windows Credential Manager Utility"
             
       - name: Create checksum
@@ -75,14 +83,8 @@ jobs:
           gh release upload "${{ github.ref_name }}" `
             --repo "${{ github.repository }}" `
             (Get-Item publish\${{ env.ASSEMBLY_NAME }}.exe).FullName `
+            (Get-Item publish\${{ env.ASSEMBLY_NAME }}.nupkg).FullName `
             (Get-Item publish\checksums.txt).FullName
-
-      - name: Build NuGet package
-        run: |
-          dotnet pack `
-          --no-build `
-          --configuration Release `
-          --output ..\nuget `
 
       - name: Push NuGet package
         env:
