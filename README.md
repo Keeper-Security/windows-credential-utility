@@ -75,7 +75,7 @@ First, the application name (used for reference of the secret), the string repre
 2. A JSON string
 3. A path to an existing JSON file
 
-When the secret is saved to the Credntial Manager it is first encoded into a BASE64 format (if not already a BASE64 string). This standardizes the format for both consistent storage and to make it easier to consume by Keeper integrations and products.
+When the secret is saved to the Credential Manager it is first encoded into a BASE64 format (if not already a BASE64 string). This standardizes the format for both consistent storage and to make it easier to consume by Keeper integrations and products.
 
 ```c#
 var secret = Parsing.ParseConfig(configArg); // Returns a BASE64 sring
