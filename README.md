@@ -1,6 +1,6 @@
 # Windows Credential Utility
 
-This utility interacts with the native windows APIs to store and retrieve secrets from Windows Credential Manager. It can be used by any integration, plugin, or code base to store and retrieve credentials, secrets, and passwords in the Linux Keyring simply and natively.
+This utility interacts with the native windows APIs to store and retrieve secrets from Windows Credential Manager. It can be used by any integration, plugin, or code base to store and retrieve credentials, secrets, and passwords in the Windows Credential Manager simply and natively.
 
 To use this utility, you can deploy the pre-built binary from the releases page, or by importing it into your code base. Both use cases are covered below.
 
