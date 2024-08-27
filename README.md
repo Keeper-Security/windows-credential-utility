@@ -1,12 +1,12 @@
-# Keeper Windows Credential Utility
+# Windows Credential Utility
 
-This utility interacts with the native windows APIs to store and retrieve secrets from the Windows Credential Manager.
+This utility interacts with the native windows APIs to store and retrieve secrets from Windows Credential Manager. It can be used by any integration, plugin, or code base to store and retrieve credentials, secrets, and passwords in the Linux Keyring simply and natively.
 
-While initially developed to help Keeper secure KSM configs, this utility can be used by any integration, plugin, or code base, to store and retrieve credentials, secrets, and passwords in the Windows Credential Manager in a simple and native way. 
+To use this utility, you can deploy the pre-built binary from the releases page, or by importing it into your code base. Both use cases are covered below.
 
-This utility has be designed to have a simple CLI interface, and the released binary to be self-contained with all dependencies and runtimes so it can work on any windows machine. You can also add this a library to your existing code base via Nuget. Both use cases are covered below.
+For Linux implementations, see the [Linux Keyring Utility](https://github.com/Keeper-Security/linux-keyring-utility).
 
-## Using the Executable 
+## Using the Executable
 
 Download the latest version from the releases page and optionally add it to PATH to get started.
 
