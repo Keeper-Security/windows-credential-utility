@@ -39,12 +39,12 @@ When the secret is saved to Windows Credential Manager it is first encoded into 
 
 ```shell
 # Save a secret
-wcm set APPNAME eyJ1c2VybmFtZSI6ICJnb2xsdW0iLCAicGFzc3dvcmQiOiAiTXlQcmVjaW91cyJ9
+wcu set APPNAME eyJ1c2VybmFtZSI6ICJnb2xsdW0iLCAicGFzc3dvcmQiOiAiTXlQcmVjaW91cyJ9
 # or
-wcm set APPNAME config.json
+wcu set APPNAME config.json
 
 # Retrieve a secret
-wcm get APPNAME
+wcu get APPNAME
 ```
 
 ## Using in Your Code
