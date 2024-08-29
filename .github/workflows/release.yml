@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 env:
-  ASSEMBLY_NAME: wcm_${{ github.ref_name }}_amd64
+  ASSEMBLY_NAME: wcu_${{ github.ref_name }}_amd64
 
 jobs:
   release:
