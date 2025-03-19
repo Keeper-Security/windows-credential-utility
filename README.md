@@ -47,49 +47,6 @@ wcu set APPNAME config.json
 wcu get APPNAME
 ```
 
-## Using in Your Code
-
-You can install this utility into your code base via Nuget:
-
-```pwsh
-dotnet add package Keeper.WindowsCredentialManager
-```
-
-You can now import this into your code base with:
-
-```c#
-using WindowsCredentialManager
-```
-
-### Usage
-
-### `set`
-
-To wite to the Windows Credential Manager you can use the provided `WriteCredential` method on the `CredentialManager` object. This will write / overwrite the secret in the current user's Credential Manager. 
-
-You need to provide the three arguments to successfully add the secret to the Credential Manager.
-
-First, the application name (used for reference of the secret), the string represntation of the username of the user, and the secret itself. This should be either:
-
-1. A BASE64 string
-2. A JSON string
-3. A path to an existing JSON file
-
-When the secret is saved to the Credential Manager it is first encoded into a BASE64 format (if not already a BASE64 string). This standardizes the format for both consistent storage and to make it easier to consume by Keeper integrations and products.
-
-```c#
-var secret = Parsing.ParseConfig(configArg); // Returns a BASE64 sring
-CredentialManager.WriteCredential("MY_APP_NAME", Environment.UserName, secret);
-```
-
-### `get`
-
-To retrieve a secret from the Credential Manager, you can pass the application name to the `ReadCredential` method. This returns the stored BASE64 encoded secret.
-
-```c#
-var cred = CredentialManager.ReadCredential("MY_APP_NAME");
-```
-
 ## Contributing
 
 Please read and refer to the contribution guide before making your first PR.
